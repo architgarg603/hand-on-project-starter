@@ -1,18 +1,15 @@
 import React from 'react';
-import './apiCard.css';
-import MainPic from '../../coverpic.svg'
+import './apiCard.scss';
 
-function apiCard() {
+function apiCard({src,name,desc}) {
   return (
   <div className='apicard'>
-      <div className='Mainpic'>
-          <img src={MainPic} alt='MainPic' ></img>
-      </div>
+          <img src={src} alt='MainPic' ></img>
        <div className='MainHeading'>
-           API Name
+           {name}
        </div>
        <div className='Description'>
-           The description of the API in quick brief and we will truncate it here....
+           {desc}
        </div>
   </div>
     )
