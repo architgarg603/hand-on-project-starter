@@ -1,0 +1,70 @@
+.mainPage{
+    background-color: #ff0404;
+
+}
+
+.banner{
+    position: absolute;
+width: 1240px;
+height: 186px;
+left: 100px;
+top: 148px;
+
+background: #C3E7FD;
+border-radius: 10px;
+}
+.coverPic{
+    position: absolute;
+width: 294px;
+height: 186px;
+left: 100px;
+top: 148px;
+}
+.heading1{
+    position: absolute;
+    width: 569px;
+    height: 58px;
+    left: 380px;
+    top: 25px;
+    font-family: Bebas Neue;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 48px;
+    line-height: 58px;
+    letter-spacing: -0.02em;
+    color: #1E272E;
+}
+
+.heading2{
+    position: absolute;
+    width: 319px;
+    height: 36px;
+    left: 524px;
+    top: 95px;
+    font-family: DM Sans;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 28px;
+    line-height: 36px;
+    letter-spacing: -0.02em;
+    color: #566474;
+
+}
+.viewButton{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 8px 16px;
+    color: white;
+    position: absolute;
+    width: 125px;
+    height: 35px;
+    left: 1033px;
+    top: 63px;
+    background: #1E272E;
+    border-radius: 5px;
+}
+.Card{
+    background-color: #1E272E;
+}
