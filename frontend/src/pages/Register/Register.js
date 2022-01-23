@@ -1,23 +1,23 @@
 import React, { useState } from "react";
-// import { useNavigate } from "react-router-dom";
 import userPic from "../../dashboard.svg";
-import "./dashboard.scss";
+import "./Register.scss";
 
-function Dashboard() {
-    // const navigate = useNavigate();
+function Register() {
+    const [name, setName] = useState("");
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
 
 
-    async function loginUser(event) {
+    async function registerUser(event) {
         event.preventDefault();
         
-        const response = await fetch ("http://localhost:3000/api/login",{
+        const response = await fetch ("http://localhost:3000/api/register",{
             method:"POST",
             headers:{
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
+                name,
                 email,
                 password,
             }),
@@ -25,14 +25,16 @@ function Dashboard() {
 
         const data = await response.json();
 
-        if(data.user) {
-            localStorage.setItem("token",data.user);
-            alert("Login successful");
-            window.location.href = "/";
+        if(data.status === "ok") {
+            alert("Successfully Registered");
+            window.location.href = "/login";
         } else {
-            alert("Please check your username and password");
+            alert("data.error");
         }
+        console.log(data);
     }
+
+    
 
 
     return (
@@ -52,8 +54,17 @@ function Dashboard() {
                 </div>
                 <div className="right">
                     <div className="rightContainer">
-                        <h1>Login to your account</h1>
-                        <form className="loginForm" onSubmit={loginUser}>
+                        <h1>Register for a new account</h1>
+                        <form className="loginForm" onSubmit={registerUser}>
+                        <input
+                                type="text"
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
+                                name="name"
+                                id="name"
+                                placeholder="Name"
+                                autoComplete="off"
+                            />
                             <input
                                 type="email"
                                 value={email}
@@ -61,7 +72,8 @@ function Dashboard() {
                                 name="email"
                                 id="email"
                                 placeholder="Email address"
-                            />
+                                autoComplete="off"
+                                />
                             <input
                                 type="password"
                                 value={password}
@@ -69,6 +81,7 @@ function Dashboard() {
                                 name="password"
                                 id="password"
                                 placeholder="Password"
+                                autoComplete="off"
                             />
                             <input type="submit" value="Login/Signup" id="submit"  />
                         </form>
@@ -79,4 +92,4 @@ function Dashboard() {
     );
 }
 
-export default Dashboard;
+export default Register;

@@ -4,6 +4,7 @@ import Mplogout from './pages/Mplogout/Mplogout';
 import Header from './components/header/Header'
 import { Routes, Route, BrowserRouter } from 'react-router-dom'
 import Dashboard from './pages/DashBoard/DashBoard';
+import Register from './pages/Register/Register';
 function App() {
 
   return (
@@ -12,7 +13,9 @@ function App() {
         <Header />
         <Routes>
           <Route path='/' element={<Mplogout />} />
-          <Route path='/dashboard' element={<Dashboard />} />
+          <Route path='/login' element={<Dashboard />} />
+          <Route path='/register' element={<Register />} />
+
         </Routes>
       </BrowserRouter>
     </>
