@@ -1,37 +1,37 @@
 ::placeholder {
     color: #9eaab7;
-  }
+}
   
-  .dashboard {
+.dashboard {
     display: flex;
     flex-direction: row;
     width: 100%;
     height: calc(100vh - 10vh);
-  }
+}
   
-  .left {
+.left {
     flex: 0.5;
     background-color: #f7f8fa;
   
-    .leftContainer {
+  .leftContainer {
       padding: 5rem;
       margin-top: 4rem;
       margin-left: 4rem;
       margin-right: 4rem;
-    }
-    .userImg {
+  }
+  .userImg {
       background-color: white;
       border-radius: 50%;
-    }
-    .title {
+  }
+  .title {
       font-weight: 700;
       font-size: 3rem;
       line-height: 62px;
       letter-spacing: -0.02em;
       color: #1e272e;
       min-height: 140px;
-    }
-    .description {
+  }
+  .description {
       font-weight: 500;
       font-size: 1.5rem;
       line-height: 160%;
@@ -39,14 +39,14 @@
       color: #566474;
       min-height: 160px;
 
-    }
   }
+}
   
-  .right {
+.right {
     flex: 0.5;
     background-color: #fff;
   
-    .rightContainer {
+  .rightContainer {
       margin-top: 7rem;
       padding: 3rem;
       margin-left: 5rem;
@@ -57,11 +57,10 @@
       box-sizing: border-box;
       border-radius: 10px;
   
-      h1 {
+    h1 {
         font-size: 1.5rem;
         font-weight: 500;
         margin-bottom: 2rem;
-      }
     }
     .loginForm {
       display: flex;
@@ -83,4 +82,15 @@
         padding-left: 57px;
       }
     }
+    .register{
+      text-align: center;
+      font-size: 1rem;
+      font-weight: 500;
+
+      .redirect{
+        text-decoration: none;
+        color: blue;
+      }
+    }
   }
+}

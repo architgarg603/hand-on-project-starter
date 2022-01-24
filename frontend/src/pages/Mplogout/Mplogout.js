@@ -2,6 +2,8 @@ import React from 'react';
 import './Mplogout.scss';
 import Coverpic from '../../coverpic.svg';
 import ApiCard from '../../components/apiCard/apiCard';
+import Header from '../../components/header/Header';
+import { Link } from "react-router-dom";
 
 function Mplogout() {
 
@@ -15,11 +17,16 @@ function Mplogout() {
 
 
   return (
+    <>
+     <div className="Header">
+        <Header />
+        <Link to="login">
+          <button className="button">Login/Signup</button>
+        </Link>
+      </div>
+
 
     <div className='mainPage'>
-
-      
-
       <div className='banner'>
         <img src={Coverpic} alt='coverpic' />
         <div className='right'>
@@ -27,7 +34,9 @@ function Mplogout() {
             <div className='heading1'>Backgroung IMAGE Remover</div>
             <div className='heading2'>100% automatic and free</div>
           </div>
+          <Link to="Bgremove">
           <div className='viewButton'>View Button</div>
+          </Link>
         </div>
       </div>
       <div className='subHead'>All APIs</div>
@@ -35,9 +44,7 @@ function Mplogout() {
        {arr.map((data,idx)=><ApiCard key={idx} src={data.src} name={data.name} desc={data.desc}></ApiCard>)}
       </div>
     </div>
-
-
-
+    </>
   )
 }
 

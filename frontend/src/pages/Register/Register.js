@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import userPic from "../../dashboard.svg";
 import "./Register.scss";
+import Header from "../../components/header/Header";
 
 function Register() {
     const [name, setName] = useState("");
@@ -33,12 +34,9 @@ function Register() {
         }
         console.log(data);
     }
-
-    
-
-
     return (
         <>
+        <Header />
             <div className="dashboard">
                 <div className="left">
                     <div className="leftContainer">

@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-// import { useNavigate } from "react-router-dom";
+import Header from '../../components/header/Header';
 import userPic from "../../dashboard.svg";
 import "./dashboard.scss";
 
 function Dashboard() {
-    // const navigate = useNavigate();
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+   
 
 
     async function loginUser(event) {
@@ -37,6 +37,7 @@ function Dashboard() {
 
     return (
         <>
+        <Header />
             <div className="dashboard">
                 <div className="left">
                     <div className="leftContainer">
@@ -71,7 +72,10 @@ function Dashboard() {
                                 placeholder="Password"
                             />
                             <input type="submit" value="Login/Signup" id="submit"  />
-                        </form>
+                          </form>
+                          <div className="register">
+                           Not a member? <a className="redirect" href="/register">Register now</a>
+                         </div>
                     </div>
                 </div>
             </div>
