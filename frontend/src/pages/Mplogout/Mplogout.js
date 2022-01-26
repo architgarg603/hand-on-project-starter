@@ -35,7 +35,7 @@ function Mplogout() {
             <div className='heading2'>100% automatic and free</div>
           </div>
           <Link to="Bgremove">
-          <div className='viewButton'>View Button</div>
+          <div className='viewButton'>View App</div>
           </Link>
         </div>
       </div>

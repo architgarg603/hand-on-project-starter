@@ -4,6 +4,7 @@ const dotenv = require("dotenv");
 const User = require("./models/user.model");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
+const bodyParser = require("body-parser");
 dotenv.config();
 
 const app = express();
@@ -11,7 +12,13 @@ const cors = require("cors");
 
 app.use(cors());
 app.use(express.json());
-
+app.use(bodyParser.json());
+app.use(
+  bodyParser.urlencoded({
+    extended: true,
+  }),
+);
+app.use(express.static("public"));
 mongoose
   .connect(process.env.MONGODB_URL)
   .then(() => {
@@ -63,6 +70,11 @@ app.post("/api/login", async (req, res) => {
   } else {
     return res.json({ status: "error", user: false });
   }
+});
+
+app.post("/bgremove", async (req, res) => {
+  console.log(req.file, req.body);
+  res.json({});
 });
 
 app.listen(process.env.PORT, () => {
