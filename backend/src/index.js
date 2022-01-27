@@ -4,7 +4,9 @@ const dotenv = require("dotenv");
 const User = require("./models/user.model");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
-const bodyParser = require("body-parser");
+const fileUpload = require("express-fileupload");
+const { removeBackgroundFromImageFile } = require("remove.bg");
+
 dotenv.config();
 
 const app = express();
@@ -12,12 +14,7 @@ const cors = require("cors");
 
 app.use(cors());
 app.use(express.json());
-app.use(bodyParser.json());
-app.use(
-  bodyParser.urlencoded({
-    extended: true,
-  }),
-);
+app.use(fileUpload());
 app.use(express.static("public"));
 mongoose
   .connect(process.env.MONGODB_URL)
@@ -73,8 +70,41 @@ app.post("/api/login", async (req, res) => {
 });
 
 app.post("/bgremove", async (req, res) => {
-  console.log(req.file, req.body);
-  res.json({});
+  let sampleFile;
+  let uploadPath;
+  // console.log(req.files);
+  if (!req.files || Object.keys(req.files).length === 0) {
+    return res.status(400).send("No files were uploaded.");
+  }
+
+  // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
+  sampleFile = req.files.file;
+  uploadPath = __dirname + "\\public\\" + sampleFile.name;
+  console.log(uploadPath);
+  // Use the mv() method to place the file somewhere on your server
+  sampleFile.mv(uploadPath, function (err) {
+    if (err) return res.status(500).send(err);
+
+    const localFile = uploadPath;
+    const outputFile = __dirname + "\\public\\f" + sampleFile.name;
+
+    removeBackgroundFromImageFile({
+      path: localFile,
+      apiKey: "4PP2znowi679dTKpNstBgdf2",
+      size: "regular",
+      type: "auto",
+      scale: "50%",
+      outputFile,
+    })
+      .then((result) => {
+        console.log(`File saved to ${outputFile}`);
+        const base64img = result.base64img;
+        res.json({ base64img });
+      })
+      .catch((errors) => {
+        console.log(JSON.stringify(errors));
+      });
+  });
 });
 
 app.listen(process.env.PORT, () => {

@@ -1,22 +1,31 @@
-import React from "react";
+import React,{useState} from "react";
 import './BgRemover.scss';
 import Header from '../../components/header/Header';
 import CoverPic from '../../coverpic.svg';
 import picIcon from '../../uploadimage.svg';
 import axios from "axios";
+import { triggerBase64Download } from 'common-base64-downloader-react';
 
 function BgRemover() {
-   
   
+  const[msg,setmsg] = useState("")
   const onSubmitHandler = async (files) => {
-    let formdata = new FormData();
-    formdata.append('file',files) 
-    console.log(formdata,files);
-    let data = await axios.post("http://localhost:3000/bgremove",formdata);
-    console.log(data);
-  }
-   
-
+ console.log(files);
+ if(!files.type.includes("image") )
+ { setmsg("File format must be .jpg, .png, .jpeg");
+   return console.log("File format must be .jpg, .png, .jpeg");
+ }else if(files.size > 4999999){
+   setmsg("File size should be less than 5Mb");
+   return console.log("File size should be less than 5Mb");
+ }
+ setmsg("processing");
+  const formdata = new FormData();
+  formdata.append("file",files);
+  let data = await axios.post("http://localhost:3000/bgremove", formdata);   
+  triggerBase64Download("data:image/png;base64,"+ data.data.base64img,"bg-removed " + files.name.split(".")[0])
+  setmsg("Downloaded");
+}
+ 
   return( 
   <>
   <Header />
@@ -37,18 +46,18 @@ function BgRemover() {
             </div>
             <p className="instructions">File should be png, jpg and less than 5mb</p>
             <label className="choose_img"> Upload Image
-             
               <input type="file" style={{display:"none"}} onChange={(e)=>{
                console.log(e.target.files[0]);
                onSubmitHandler(e.target.files[0])}}>
               </input>
             </label>
-        
+            
         
             {/* <button className="choose_img">Upload Image
             
             </button> */}
             <p className="instructions">Or drop a file</p>
+            {msg}
           </div>
         </div>
       </div>
@@ -56,4 +65,3 @@ function BgRemover() {
   )}
 
 export default BgRemover;
-
