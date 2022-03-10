@@ -46,7 +46,7 @@ function BgRemover() {
             </div>
             <p className="instructions">File should be png, jpg and less than 5mb</p>
             <label className="choose_img"> Upload Image
-              <input type="file" style={{display:"none"}} onChange={(e)=>{
+              <input type="file" style={{display:"none"}} onChange={(e)=>{               
                console.log(e.target.files[0]);
                onSubmitHandler(e.target.files[0])}}>
               </input>
