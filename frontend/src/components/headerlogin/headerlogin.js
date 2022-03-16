@@ -1,31 +1,37 @@
 import React,{useState} from 'react';
 import './headerlogin.scss';
 import Cuvette from '../../Cuvette.svg';
-import { Link } from "react-router-dom";
-import Modal from "../modal/modal";
-
-
+import { Link, useNavigate } from "react-router-dom";
+import Modal from '../Modal/Modal';
+import { Icon } from '@iconify/react';
 function headerlogin() {
-const [openModal, setOpenModal] = useState(false);
+  const navigate=useNavigate();
+    const [openModal, setOpenModal] = useState(false);
     return (
         <div className='headerlogin'>
-           <Link to="/">
-           <img className='Cuvette' src={Cuvette} alt='logo'></img>
-               </Link> 
-               <Link to="MyAPI">
-          <button className="button1">My APIs</button>
+        <Link to="/">
+        <img className='Cuvette' src={Cuvette} alt='logo'></img>
         </Link>
-        <Link to="NewApi">
-          <button     
-          className="modal"
-          onClick={() => {
-          setOpenModal(true);
-          }}> 
-          +New API
-          </button>
+           
+        <div>
+        
+         <Link to="/MyApi">
+         <button className="button1" >My APIs</button> </Link>
+       
+          <button className="button2"
+           onClick={() => {
+            setOpenModal(true);
+            }}>+New API</button>
           {openModal && <Modal closeModal={setOpenModal} />}
-        </Link>
-        </div>
+          
+            <Icon icon="tabler:logout"  className='logout'
+            onClick= {() => {
+              localStorage.setItem("accessToken","")
+              navigate("/")
+            }}/>        
+
+          </div>
+       </div>
     );
 }
 export default headerlogin;

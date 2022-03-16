@@ -1,29 +1,57 @@
-import React from 'react'
-import Coverpic from '../../coverpic.svg';
+import React,{useState,useEffect} from 'react'
 import ApiCard from '../../components/apiCard/apiCard';
 import Headerlogin from '../../components/headerlogin/headerlogin';
+import { useNavigate } from "react-router-dom";
+import "./MyApi.scss";
 
-
-function MyApi() {
-
-    let arr = [
-        {src:Coverpic, name:"Backgound Remove", desc:"The description of the API in quick brief and we will truncate it here...."},
-        {src:Coverpic, name:"Backgound Remove", desc:"The description of the API in quick brief and we will truncate it here...."},
-        {src:Coverpic, name:"Backgound Remove", desc:"The description of the API in quick brief and we will truncate it here...."},
-        {src:Coverpic, name:"Backgound Remove", desc:"The description of the API in quick brief and we will truncate it here...."},
-        {src:Coverpic, name:"Backgound Remove", desc:"The description of the API in quick brief and we will truncate it here...."}
-      ]
-  return (
-    <div> 
-         <div className="Head">
-        <Headerlogin />
-      
-      </div>
-    <div className='cardContainer'>
-    {arr.map((data,idx)=><ApiCard key={idx} src={data.src} name={data.name} desc={data.desc}></ApiCard>)}
-   </div>
-   </div>
-  )
-}
-
-export default MyApi
+export default function MyApi() {
+    const navigate = useNavigate();
+    const [data, setData] = useState([]);
+  
+    useEffect(() => {
+      if (localStorage.getItem("accessToken") == null) {
+        navigate("/login");
+      }
+  
+      fetch("http://localhost:3000/api/myapi", {
+          method:"GET",
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("accessToken"),
+        },
+      })
+        .then((res) => res.json())
+        .then((result) => {
+          setData(result.myapi);
+        });
+    }, []);
+  
+    return (
+      <>
+        <div className="nav">
+          <Headerlogin />
+        </div>
+        <div className="container">
+          <div className="title">
+            <h1 className="apiHeading">Your uploaded APIs</h1>
+          </div>
+          {data.length == 0 ? (
+            <p className="text">No APIs Uploaded</p>
+          ) : (
+            <>
+              <div className="cards">
+                {data.map((data, idx) => (
+                  <ApiCard
+                    key={idx}
+                    name={data.name}
+                    desc={data.description}
+                    endPoint={data.endPoint}
+                    id={data._id}
+                  ></ApiCard>
+                ))}
+              </div>
+            </>
+          )}
+        </div>
+      </>
+    );
+  }

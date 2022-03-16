@@ -26,14 +26,13 @@ function Dashboard() {
         const data = await response.json();
 
         if(data.user) {
-            localStorage.setItem("token",data.user);
+            localStorage.setItem("accessToken",data.user);
             alert("Login successful");
-            window.location.href = "/";
+            window.location.href = "/mplogin";
         } else {
             alert("Please check your username and password");
         }
     }
-
 
     return (
         <>
