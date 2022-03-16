@@ -13,8 +13,9 @@ function headerlogin() {
         <img className='Cuvette' src={Cuvette} alt='logo'></img>
         </Link>
            
-        <div>
-        
+        <div style={{display: "flex",
+         alignItems: "center"}}>
+         
          <Link to="/MyApi">
          <button className="button1" >My APIs</button> </Link>
        

@@ -1,6 +1,6 @@
 .apicard {
-    height: 250px;
-    width: 200px;
+  height: 270px;
+  width: 255px;
     display: flex;
     flex-direction: column;
     margin: 0.5rem 0.125rem;
@@ -10,6 +10,7 @@
       display: flex;
       flex-direction: row;
       justify-content: space-between;
+      gap: 1rem;
       .Description {
         margin-top: 0.3rem;
         color: gray;

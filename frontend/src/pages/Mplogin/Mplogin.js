@@ -19,7 +19,7 @@ function Mplogin() {
   useEffect(() => {
     let token=localStorage.getItem("accessToken")
     if(token)navigate("/mplogin")
-  })
+  },[])
   useEffect(() => {
     // eslint-disable-next-line no-undef
     fetch(`${process.env.REACT_APP_BACKEND_URL}/api`)
@@ -56,7 +56,7 @@ function Mplogin() {
             <div className='heading1'>Backgroung IMAGE Remover</div>
             <div className='heading2'>100% automatic and free</div>
           </div>
-          <Link to="Bgremove">
+          <Link to="/Bgremove">
           <div className='viewButton'>View App</div>
           </Link>
         </div>

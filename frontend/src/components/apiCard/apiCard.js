@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import './apiCard.scss';
-import MainPic from "../../coverpic.svg";
+import MainPic from "../../apiimg.png";
 import { Icon } from "@iconify/react";
 import EditModal from "../EditModal/EditModal";
 
