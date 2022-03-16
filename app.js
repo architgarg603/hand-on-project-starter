@@ -20,7 +20,7 @@ dotenv.config();
 
 const app = express();
 const cors = require("cors");
-const { validateToken } = require("./middlewares");
+const { validateToken } = require("./middlewares/index");
 
 app.use(cors());
 app.use(express.json());
